@@ -1,3 +1,7 @@
+= Moskrin's changes to acts_as_indexed:
+
+Added a config option called default_partial_word which does partial word matches instead of full-word matches by default.  To force full-word matching when this is enabled, quote the word.  The feature is disabled by default to match the default behaviour of the original.
+
 = acts_as_indexed
 
 If you find this plugin useful, please consider a donation to show your
