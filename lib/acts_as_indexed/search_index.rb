@@ -11,6 +11,7 @@ module ActsAsIndexed #:nodoc:
       @records_size = @storage.record_count
       @case_sensitive = config.case_sensitive
       @if_proc = config.if_proc
+      @default_partial_word = config.default_partial_word
     end
 
     # Adds +record+ to the index.
@@ -195,7 +196,11 @@ module ActsAsIndexed #:nodoc:
 
         # If these atoms are to be run as 'starts with', make them a Regexp
         # with a carat.
-        atom = /^#{atom}/ if starts_with
+        if starts_with
+          atom = /^#{atom}/
+        elsif @default_partial_word
+          atom = /#{atom}/
+        end
 
         # Get the resulting matches, and break if none exist.
         matches = get_atom_results(@atoms.keys, atom)

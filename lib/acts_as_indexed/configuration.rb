@@ -35,12 +35,18 @@ module ActsAsIndexed
     # Default is guessed depending on current platform.
     attr_writer :is_windows_filesystem
 
+    # Set to search partial words rather than complete words.  You can still search
+    # complete words by quoting them.
+    # Default false, because upstream repo works that way
+    attr_accessor :default_partial_word
+
     def initialize
       @index_file       = nil
       @index_file_depth = 3
       @min_word_size    = 3
       @if_proc          = if_proc
       @case_sensitive   = false
+      @default_partial_word = false
       @disable_auto_indexing = false
       @is_windows_filesystem = RUBY_PLATFORM[/mswin32|mingw|cygwin/]
     end
